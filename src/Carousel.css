@@ -1,0 +1,103 @@
+/* src/Carousel.css */
+.carousel {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: linear-gradient(135deg, #ffcc99, #ff6600); /* Orange gradient background */
+}
+
+.track-card {
+    position: absolute;
+    width: 600px;
+    height: 800px;
+    background: white;
+    border-radius: 15px; /* Rounded corners for a card-like look */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: grab;
+    user-select: none;
+    transform: translateX(0);
+    will-change: transform;
+    border: 1px solid #ddd; /* Light border to define edges */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+}
+
+.track-card:hover {
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+    transform: scale(1.02); /* Slight zoom effect on hover */
+}
+
+.track-cover {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 15px 15px 0 0; /* Rounded top corners */
+    border-bottom: 1px solid #ddd; /* Border between cover and content */
+}
+
+h2, p {
+    margin: 0;
+    padding: 0 20px;
+    text-align: center;
+    color: #333; /* Dark grey text color for better readability */
+}
+
+.play-pause-button {
+    background: transparent;
+    border: none;
+    font-size: 48px;
+    cursor: pointer;
+    color: #ff6600; /* Orange color for the play/pause icon */
+    margin: 20px 0; /* Spacing above and below button */
+}
+
+.play-pause-button i {
+    transition: color 0.3s;
+}
+
+.play-pause-button:hover i {
+    color: #ff4500; /* Darker orange for hover effect */
+}
+
+.error-message {
+    color: #ff6600; /* Orange color for error messages */
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+.action-buttons {
+    margin-top: 20px;
+    display: flex;
+    gap: 20px;
+}
+
+.like-button, .dislike-button {
+    background: #ff6600; /* Orange background for buttons */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.dislike-button {
+    background: #ff4500; /* Slightly darker orange for dislike */
+}
+
+.like-button:hover, .dislike-button:hover {
+    opacity: 0.8;
+    background-color: #e65c00; /* Darker shade of orange for hover */
+}
+
+.dislike-button:hover {
+    background-color: #cc3700; /* Even darker shade for dislike hover */
+}

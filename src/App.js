@@ -1,17 +1,13 @@
-import logo from './recco_logo.png';
-import './App.css';
+// src/App.js
+import React from 'react';
+import Carousel from './Carousel';
 
-function App() {
+const App = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Explore Music and Artists from Other Music Lovers Around the world!
-        </p>
-      </header>
+      <Carousel />
     </div>
   );
-}
+};
 
 export default App;
