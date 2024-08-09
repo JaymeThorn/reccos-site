@@ -27,7 +27,7 @@ async function fetchAccessToken() {
 export async function fetchPopularTracks() {
     try {
       const token = await fetchAccessToken();
-      const playlistId = '37i9dQZF1DXcBWIGoYBM5M'; // Example playlist ID for "Top 50 Global"
+      const playlistId = '0ODPsXk74vPUWc9BRp185e'; // Example playlist ID for "Top 50 Global"
       const response = await fetch(TOP_TRACKS_PLAYLIST_URL.replace('{playlist_id}', playlistId), {
         headers: {
           'Authorization': `Bearer ${token}`,

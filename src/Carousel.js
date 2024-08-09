@@ -11,6 +11,7 @@ const Carousel = () => {
   const [playing, setPlaying] = useState(false);
   const [audio, setAudio] = useState(null);
   const [error, setError] = useState('');
+  const [showMenu, setShowMenu] = useState(false); // State to toggle menu visibility
   const [{ x }, api] = useSpring(() => ({ x: 0 }));
 
   const startX = useRef(0);
@@ -113,6 +114,10 @@ const Carousel = () => {
     }
   };
 
+  const handleMenuToggle = () => {
+    setShowMenu(!showMenu);
+  };
+
   const handleLike = () => {
     console.log('Liked:', tracks[currentIndex]);
     setCurrentIndex((prevIndex) => (prevIndex + 1) % tracks.length);
@@ -157,7 +162,34 @@ const Carousel = () => {
 
   return (
     <div className="carousel">
-      {error && <div className="error-message">{error}</div>}
+      <div className="hamburger-menu">
+        <button
+          className={`hamburger-icon ${showMenu ? 'active' : ''}`}
+          onClick={handleMenuToggle}
+        >
+          <div className="bar"></div>
+          <div className="bar"></div>
+          <div className="bar"></div>
+        </button>
+      </div>
+
+      <div className={`side-nav ${showMenu ? 'show' : ''}`}>
+        <button className="close-btn" onClick={handleMenuToggle}>
+          &times;
+        </button>
+        <ul>
+          <li>
+            <a href="#!" onClick={handleMenuToggle}>Home</a>
+          </li>
+          <li>
+            <a href="#!" onClick={handleMenuToggle}>About</a>
+          </li>
+          <li>
+            <a href="#!" onClick={handleMenuToggle}>Contact</a>
+          </li>
+        </ul>
+      </div>
+
       <animated.div
         className="track-card"
         style={{ transform: x.to((x) => `translateX(${x}px)`) }}
@@ -176,13 +208,25 @@ const Carousel = () => {
         </button>
         <div className="action-buttons">
           <button onClick={handleDislike} className="dislike-button">
-            Dislike
+            <i className="fas fa-times"></i> {/* Icon for dislike */}
           </button>
           <button onClick={handleLike} className="like-button">
-            Like
+            <i className="fas fa-heart"></i> {/* Icon for like */}
           </button>
         </div>
       </animated.div>
+
+      <div className="likes-list">
+        <h2>Liked Songs</h2>
+        <ul>
+          {tracks.filter((_, index) => index < 5).map((track, index) => (
+            <li key={index}>
+              <img src={track.cover} alt={track.title} className="track-cover-small" />
+              <span>{track.title} - {track.artist}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };

@@ -1,103 +1,192 @@
-/* src/Carousel.css */
+/* Basic styles for the carousel and hamburger menu */
 .carousel {
     position: relative;
-    width: 100%;
-    height: 100vh;
+    margin-right: 250px; /* Space for the liked tracks list */
     display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    background: linear-gradient(135deg, #ffcc99, #ff6600); /* Orange gradient background */
-}
-
-.track-card {
-    position: absolute;
-    width: 600px;
-    height: 800px;
-    background: white;
-    border-radius: 15px; /* Rounded corners for a card-like look */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    justify-content: center; /* Center the card horizontally */
+    align-items: center; /* Center the card vertically */
+    height: 100vh; /* Full viewport height */
+  }
+  
+  .hamburger-menu {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+  }
+  
+  .hamburger-icon {
+    cursor: pointer;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    cursor: grab;
-    user-select: none;
-    transform: translateX(0);
-    will-change: transform;
-    border: 1px solid #ddd; /* Light border to define edges */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
-}
-
-.track-card:hover {
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
-    transform: scale(1.02); /* Slight zoom effect on hover */
-}
-
-.track-cover {
-    width: 100%;
-    height: 400px;
-    object-fit: cover;
-    border-radius: 15px 15px 0 0; /* Rounded top corners */
-    border-bottom: 1px solid #ddd; /* Border between cover and content */
-}
-
-h2, p {
+    width: 40px; /* Increased width for better visibility */
+    height: 40px; /* Increased height for better visibility */
+    background-color: transparent;
+    border: none;
+  }
+  
+  .hamburger-icon .bar {
+    width: 30px; /* Adjusted width */
+    height: 5px; /* Increased height for better visibility */
+    background-color: #333; /* Darker color for the hamburger icon */
+    margin: 6px 0;
+    transition: 0.3s;
+  }
+  
+  .side-nav {
+    position: fixed;
+    top: 0;
+    left: -250px; /* Hide menu by default */
+    width: 250px;
+    height: 100vh;
+    background-color: #333;
+    color: #fff;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    transition: left 0.3s ease;
+    z-index: 999; /* Ensure it appears above other elements */
+    padding: 10px;
+  }
+  
+  .side-nav.show {
+    left: 0; /* Show the menu */
+  }
+  
+  .side-nav .close-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+  
+  .side-nav ul {
+    list-style: none;
+    padding: 0;
     margin: 0;
-    padding: 0 20px;
+  }
+  
+  .side-nav ul li {
+    border-bottom: 1px solid #444;
+  }
+  
+  .side-nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 18px;
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .side-nav ul li a:hover {
+    background-color: #555;
+  }
+  
+  .hamburger-icon.active .bar:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 6px);
+  }
+  
+  .hamburger-icon.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .hamburger-icon.active .bar:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -6px);
+  }
+  
+  /* Ensure the carousel card is centered */
+  .track-card {
+    position: relative;
+    width: 300px;
     text-align: center;
-    color: #333; /* Dark grey text color for better readability */
-}
-
-.play-pause-button {
+    z-index: 1; /* Ensure it appears above other elements */
+  }
+  
+  .track-cover {
+    width: 100%;
+    border-radius: 10px;
+  }
+  
+  .play-pause-button {
+    margin-top: 10px;
+  }
+  
+  /* Make the action buttons larger and more prominent */
+  .action-buttons {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    z-index: 1;
+  }
+  
+  .like-button, .dislike-button {
+    font-size: 24px;
     background: transparent;
     border: none;
-    font-size: 48px;
     cursor: pointer;
-    color: #ff6600; /* Orange color for the play/pause icon */
-    margin: 20px 0; /* Spacing above and below button */
-}
-
-.play-pause-button i {
-    transition: color 0.3s;
-}
-
-.play-pause-button:hover i {
-    color: #ff4500; /* Darker orange for hover effect */
-}
-
-.error-message {
-    color: #ff6600; /* Orange color for error messages */
-    margin-top: 20px;
-    font-size: 18px;
-}
-
-.action-buttons {
-    margin-top: 20px;
-    display: flex;
-    gap: 20px;
-}
-
-.like-button, .dislike-button {
-    background: #ff6600; /* Orange background for buttons */
-    border: none;
     color: white;
-    padding: 10px 20px;
-    font-size: 18px;
+    padding: 10px;
+  }
+  
+  /* Style for liked/disliked cards */
+  .like-button {
+    color: #4CAF50; /* Green for like */
+  }
+  
+  .dislike-button {
+    color: #F44336; /* Red for dislike */
+  }
+  
+  /* Style for the likes list */
+  .likes-list {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 250px; /* Adjusted width */
+    height: 100vh;
+    background-color: #f4f4f4;
+    border-left: 1px solid #ddd;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    padding: 10px;
+    z-index: 999;
+  }
+  
+  .likes-list h2 {
+    margin-top: 0;
+  }
+  
+  .likes-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .likes-list ul li {
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+  }
+  
+  .likes-list ul li img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
     border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.dislike-button {
-    background: #ff4500; /* Slightly darker orange for dislike */
-}
-
-.like-button:hover, .dislike-button:hover {
-    opacity: 0.8;
-    background-color: #e65c00; /* Darker shade of orange for hover */
-}
-
-.dislike-button:hover {
-    background-color: #cc3700; /* Even darker shade for dislike hover */
-}
+  }
+  
+  .track-cover-small {
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+  }
+  
